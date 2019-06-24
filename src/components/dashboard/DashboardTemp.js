@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const DashboardTemp = ({ projects }) => {
+const DashboardTemp = ({ projects, notifications }) => {
     const classes = useStyles()
 
     return (
@@ -29,7 +29,7 @@ const DashboardTemp = ({ projects }) => {
                 </Grid>
                 <Grid item xs={12} md={1}></Grid>
                 <Grid item xs={12} md={5}>
-                    <Notifications />
+                    <Notifications notifications={notifications} />
                 </Grid>
             </Grid>
         </div>

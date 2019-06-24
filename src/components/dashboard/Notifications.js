@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, Card, CardContent, Typography, makeStyles } from '@material-ui/core'
+import moment from 'moment'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,26 +15,33 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const Notifications = () => {
+const Notifications = (props) => {
     const classes = useStyles()
+    const { notifications } = props
+    console.log(notifications)
 
     return (
         <Card className={classes.card}>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Notifications
+                    notifications
                 </Typography>
                 <Grid container>
-                    <Grid item xs={12}>
-                        <Typography variant="body2" color="textPrimary" component="span">
-                            Notification
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="body2" color="textPrimary" component="span">
-                            Notification
-                        </Typography>
-                    </Grid>
+                    {notifications && notifications.map(notification => {
+                        return (
+                            <Grid item xs={12} key={notification.id}>
+                                <Typography variant="body2" color="secondary" component="span">
+                                    {`${notification.user} `}
+                                </Typography>
+                                <Typography variant="body2" color="textPrimary" component="span">
+                                    {`${notification.content} `}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="span">
+                                    {moment(notification.time.toDate()).fromNow()}
+                                </Typography>
+                            </Grid>
+                        )
+                    })}
                 </Grid>
             </CardContent>
         </Card>
